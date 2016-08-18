@@ -1,11 +1,10 @@
 fileFormatVersion: 2
-guid: 980c05c6e53be744697e133da0e45639
-timeCreated: 1471546845
+guid: d5f850b7e1261ff4ba4e0f6a11d0f102
+timeCreated: 1471541033
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences:
-  - floorCellPrefab: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
