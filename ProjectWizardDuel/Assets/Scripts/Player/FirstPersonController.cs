@@ -55,32 +55,5 @@ public class FirstPersonController : MonoBehaviour {
 		// Move player
 		characterController.Move(transform.rotation * velocity * Time.deltaTime);
 
-		//Spell Creation
-
-
-		if(Input.GetKeyDown("z") || Input.GetKeyDown("x") || Input.GetKeyDown("c")
-		 || Input.GetKeyDown("v") || Input.GetKeyDown("b")){
-			
-			if(Input.GetKeyDown("z")){
-				key = "z";
-			}
-			else if(Input.GetKeyDown("x")){
-				key = "x";
-			}
-			else if(Input.GetKeyDown("c")){
-				key = "c";
-			}			
-			else if(Input.GetKeyDown("v")){
-				key = "v";
-			}			
-			else{
-				key = "b";
-			}
-			//player.spellString.push(key);
-			//player.restartTimer(spellExhaustTimer);
-		}
-		if(Input.GetKeyDown("mouse 0")){
-			//Debug.Log("Firing Spell " + key);
-		}
 	}
 }
