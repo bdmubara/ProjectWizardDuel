@@ -80,7 +80,7 @@ public class FirstPersonController : MonoBehaviour {
 			//player.restartTimer(spellExhaustTimer);
 		}
 		if(Input.GetKeyDown("mouse 0")){
-			Debug.Log("Firing Spell " + key);
+			//Debug.Log("Firing Spell " + key);
 		}
 	}
 }
