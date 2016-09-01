@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Spell : MonoBehaviour {
 
+	public SpellCollisionExplosion collisionExplosionPrefab;
+	public float spellSpeed = 20.0f;
+
 	float lifespan = 10.0f;
 
 	// Use this for initialization
@@ -20,6 +23,10 @@ public class Spell : MonoBehaviour {
 	// Called on collision with another rigidbody
 	void OnCollisionEnter (Collision collision) {
 		if (collision.gameObject.tag == "ArenaSurface") {
+			// Create spell explosion before destroying spell
+			SpellCollisionExplosion explosion = Instantiate(collisionExplosionPrefab) as SpellCollisionExplosion;
+			explosion.transform.position = transform.position;
+
 			Destroy(this.gameObject);
 		}
 	}

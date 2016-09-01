@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Text;
 using System;
@@ -59,7 +59,6 @@ public class SpellController : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-
 		//Spell Creation
 		if(currentRune.Name == "Book"){
 			correctSpell = false;
