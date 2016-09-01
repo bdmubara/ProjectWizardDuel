@@ -1,19 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Arena : MonoBehaviour {
 
+	public IntVector2 size;
 	public FloorCell floorCellPrefab;
 	public Wall wallPrefab;
 	public Killbox killboxPrefab;
-	public IntVector2 size;
+	public Opponent opponentPrefab;
 
 	FloorCell[,] floorCells;
+	List<Wall> walls;
+	Opponent opponentInstance;
 
 
 	// Use this for initialization
 	void Start () {
-	
 	}
 	
 	// Update is called once per frame
@@ -21,9 +24,15 @@ public class Arena : MonoBehaviour {
 	
 	}
 
+	void Initialize () {
+		floorCells = new FloorCell[size.x, size.z];
+		walls = new List<Wall>();
+	}
+
 
 	public void Generate () {
-		floorCells = new FloorCell[size.x, size.z];
+		Initialize();
+
 		IntVector2 coordinates;
 		coordinates.x = 0;
 		coordinates.z = 0;
@@ -41,6 +50,8 @@ public class Arena : MonoBehaviour {
 		Killbox killboxInstance = Instantiate(killboxPrefab) as Killbox;
 		killboxInstance.transform.parent = transform;
 
+		opponentInstance = Instantiate(opponentPrefab) as Opponent;
+		opponentInstance.transform.position = Vector3.forward * 10.0f; // Debug: spawn opponent in front of player
 	}
 
 
@@ -70,6 +81,7 @@ public class Arena : MonoBehaviour {
 			else {
 				wall.transform.localRotation = Quaternion.Euler(0, 270, 0);
 			}
+			walls.Add(wall);
 		}
 		if (coordinates.z == 0 || coordinates.z == size.z - 1) {
 			Wall wall = Instantiate(wallPrefab) as Wall;
@@ -77,6 +89,7 @@ public class Arena : MonoBehaviour {
 			wall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 0.5f, 0f, coordinates.z - size.z * 0.5f +0.5f);
 			if (coordinates.z == size.z - 1)
 				wall.transform.localRotation = Quaternion.Euler(0, 180, 0);
+			walls.Add(wall);
 		}
 
 		return createdWall;

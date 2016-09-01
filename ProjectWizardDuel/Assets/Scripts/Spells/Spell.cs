@@ -22,12 +22,20 @@ public class Spell : MonoBehaviour {
 
 	// Called on collision with another rigidbody
 	void OnCollisionEnter (Collision collision) {
-		if (collision.gameObject.tag == "ArenaSurface") {
-			// Create spell explosion before destroying spell
-			SpellCollisionExplosion explosion = Instantiate(collisionExplosionPrefab) as SpellCollisionExplosion;
-			explosion.transform.position = transform.position;
-
-			Destroy(this.gameObject);
+		if (collision.gameObject.tag == "Opponent") {
+			// TODO: opponent should be affected by spell
+			DestroyWithExplosion();
 		}
+		else if (collision.gameObject.tag == "ArenaSurface") {
+			DestroyWithExplosion();
+		}
+	}
+
+	void DestroyWithExplosion () {
+		// Create spell explosion before destroying spell
+		SpellCollisionExplosion explosion = Instantiate(collisionExplosionPrefab) as SpellCollisionExplosion;
+		explosion.transform.position = transform.position;
+
+		Destroy(this.gameObject);
 	}
 }
