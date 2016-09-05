@@ -35,3 +35,7 @@ sysinfo.txt
 *.sublime-project.meta
 *.sublime-workspace
 *.sublime-workspace.meta
+
+# Unity generated asset merge files
+*.orig
+*.orig.meta
