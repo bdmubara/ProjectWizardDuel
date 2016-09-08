@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 
 [Serializable]
-public class Stat {
+public class PlayerStat {
 	[SerializeField]
 	private BarScript bar;
 	[SerializeField]
@@ -16,7 +16,7 @@ public class Stat {
 			return curVal;
 		}
 		set {
-			this.curVal = value;
+			this.curVal = Mathf.Clamp(value, 0, MaxVal);
 			bar.Value = curVal;
 		}
 	}

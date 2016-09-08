@@ -183,8 +183,8 @@ MonoBehaviour:
     curVal: 100
   longMana:
     bar: {fileID: 0}
-    maxVal: 2500
-    curVal: 2500
+    maxVal: 300
+    curVal: 300
   health:
     bar: {fileID: 0}
     maxVal: 1000

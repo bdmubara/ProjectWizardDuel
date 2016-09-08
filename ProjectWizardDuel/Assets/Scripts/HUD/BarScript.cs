@@ -4,11 +4,13 @@ using System.Collections;
 
 public class BarScript : MonoBehaviour {
 
-	[SerializeField]
 	private float fillAmount;
 
 	[SerializeField]
 	private Image content;
+
+	[SerializeField]
+	private int lerpSpeed;
 
 	public float MaxValue {
 		get;
@@ -33,7 +35,7 @@ public class BarScript : MonoBehaviour {
 
 	private void HandleBar() {
 		if(content.fillAmount != fillAmount){
-			content.fillAmount = fillAmount;
+			content.fillAmount = Mathf.Lerp(content.fillAmount, fillAmount, Time.deltaTime * lerpSpeed);
 		}
 	}
 
