@@ -8,13 +8,15 @@ public class TreeNode : IEnumerable<TreeNode>{
 
     public readonly string ID;
     public readonly string Name;
+    public readonly bool Correct;
     //TODO:Spell Class that conatins information about spell
     public TreeNode Parent { get; private set; }
 
     public TreeNode(){}
-    public TreeNode(string id, string name){
+    public TreeNode(string id, string name, bool correct){
         this.ID = id;
         this.Name = name;
+        this.Correct = correct;
     }
 
     public TreeNode GetChild(string id){
