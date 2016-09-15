@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
-public class FirstPersonController : MonoBehaviour {
+public class FirstPersonController : NetworkBehaviour {
 
 	public float movementSpeed = 4.0f;
 	public float aerialMovementSpeed = 2.0f;
@@ -11,22 +12,22 @@ public class FirstPersonController : MonoBehaviour {
 	public float jumpSpeed = 4.0f;
 
 	CharacterController characterController;
+	GameObject playerCamera;
 	float velocityY = 0.0f;
 	float rotationY = 0.0f;
-
-	string key = "";
 	
-
 
 	// Use this for initialization
 	void Start () {
-		characterController = GetComponent<CharacterController>();
+		characterController = this.GetComponent<CharacterController>();
+		playerCamera = this.transform.Find("Camera").gameObject;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		// Movement
+		if (!isLocalPlayer) { return; }
 
+		// Movement
 		float speedMultiplier = (characterController.isGrounded) ? movementSpeed : aerialMovementSpeed;
 
 		float forwardSpeed =  Input.GetAxis("Vertical") * speedMultiplier;
@@ -50,7 +51,7 @@ public class FirstPersonController : MonoBehaviour {
 		}
 
 		rotationY = Mathf.Clamp(rotationY, -YAxisViewLimit, YAxisViewLimit);
-		Camera.main.transform.localRotation = Quaternion.Euler(rotationY, 0, 0);
+		playerCamera.transform.localRotation = Quaternion.Euler(rotationY, 0, 0);
 
 		// Move player
 		characterController.Move(transform.rotation * velocity * Time.deltaTime);

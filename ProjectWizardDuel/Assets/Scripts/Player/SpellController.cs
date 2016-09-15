@@ -27,6 +27,7 @@ public class SpellController : MonoBehaviour {
 		Debug.Log(TreeNode.BuildString(spellBook));
 		//currentRune = spellBook;
 	}
+	
 	void FixedUpdate(){
 		timer -= Time.deltaTime;
 		//Debug.Log(timer);
@@ -81,9 +82,15 @@ public class SpellController : MonoBehaviour {
 		// }
 	}
 	void stopTimer(){
+<<<<<<< Updated upstream
 		// timer = -1;
 		// currentRune = spellBook;
 		// correctSpell = false;
+=======
+		timer = -1;
+		currentRune = spellBook;
+		correctSpell = false;
+>>>>>>> Stashed changes
 		// Debug.Log("Reseting Timer");
 	}
 

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
-public class WandController : MonoBehaviour {
+public class WandController : NetworkBehaviour {
 
 	public Wand wandPrefab;
 	public Spell spellPrefab;
@@ -11,9 +12,12 @@ public class WandController : MonoBehaviour {
 
 
 	Wand wandInstance;
+	GameObject playerCamera;
 
 	// Use this for initialization
 	void Start () {
+		playerCamera = this.transform.Find("Camera").gameObject;
+
 		wandInstance = Instantiate(wandPrefab) as Wand;
 		wandInstance.transform.parent = transform;
 		UpdateWandPosition();
@@ -22,13 +26,13 @@ public class WandController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		UpdateWandPosition();
-		if (Input.GetButtonDown("Fire1")) {
+		if (Input.GetButtonDown("Fire1") && isLocalPlayer) {
 			wandInstance.FireSpell(spellPrefab);
 		}
 	}
 
 	void UpdateWandPosition () {
-		wandInstance.transform.position = Camera.main.transform.position + (Camera.main.transform.forward * wandDistanceFromPlayer) + (Camera.main.transform.right * wandRightOffset) + (Camera.main.transform.up * -wandDownOffset);
-		wandInstance.transform.localRotation = Camera.main.transform.localRotation;
+		wandInstance.transform.position = playerCamera.transform.position + (playerCamera.transform.forward * wandDistanceFromPlayer) + (playerCamera.transform.right * wandRightOffset) + (playerCamera.transform.up * -wandDownOffset);
+		wandInstance.transform.localRotation = playerCamera.transform.localRotation;
 	}
 }

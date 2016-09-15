@@ -8,11 +8,9 @@ public class Arena : MonoBehaviour {
 	public FloorCell floorCellPrefab;
 	public Wall wallPrefab;
 	public Killbox killboxPrefab;
-	public Opponent opponentPrefab;
 
 	FloorCell[,] floorCells;
 	List<Wall> walls;
-	Opponent opponentInstance;
 
 
 	// Use this for initialization
@@ -49,9 +47,6 @@ public class Arena : MonoBehaviour {
 
 		Killbox killboxInstance = Instantiate(killboxPrefab) as Killbox;
 		killboxInstance.transform.parent = transform;
-
-		opponentInstance = Instantiate(opponentPrefab) as Opponent;
-		opponentInstance.transform.position = Vector3.forward * 10.0f; // Debug: spawn opponent in front of player
 	}
 
 

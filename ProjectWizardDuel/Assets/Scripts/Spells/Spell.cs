@@ -23,7 +23,7 @@ public class Spell : MonoBehaviour {
 
 	// Called on collision with another rigidbody
 	void OnCollisionEnter (Collision collision) {
-		if (collision.gameObject.tag == "Opponent") {
+		if (collision.gameObject.tag == "Player") {
 			// TODO: opponent should be affected by spell
 			DestroyWithExplosion();
 		}

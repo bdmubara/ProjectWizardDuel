@@ -9,7 +9,7 @@ TagManager:
   - Wand
   - Spell
   - Arena
-  - Opponent
+  - Camera
   layers:
   - Default
   - TransparentFX
