@@ -11,6 +11,7 @@ public class TreeNode : IEnumerable<TreeNode>{
     public readonly string ID;
     public readonly string Name;
     public readonly bool Correct;
+    public SpellObject Spell;
     //TODO: Spell Class that conatins information about spell
     public TreeNode Parent { get; private set; }
 
@@ -19,6 +20,12 @@ public class TreeNode : IEnumerable<TreeNode>{
         this.ID = id;
         this.Name = name;
         this.Correct = correct;
+    }
+    public TreeNode(string id, string name, bool correct, string spellname, float mana, float damage){
+        this.ID = id;
+        this.Name = name;
+        this.Correct = correct;
+        this.Spell = new SpellObject(spellname, mana, damage);
     }
 
     public TreeNode GetChild(string id){
@@ -71,7 +78,7 @@ public class TreeNode : IEnumerable<TreeNode>{
                 child = new TreeNode(splitLine[0], splitLine[1], true);
             else
                 child = new TreeNode(splitLine[0], splitLine[1], false);
-            Debug.Log(trimmedLine);
+            //Debug.Log(trimmedLine);
             list[indent].Add(child);
 
             if (indent + 1 < list.Count)

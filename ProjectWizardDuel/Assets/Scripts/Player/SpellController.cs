@@ -2,12 +2,13 @@ using UnityEngine;
 using System.Collections;
 using System.Text;
 using System;
+using UnityEngine.Networking;
 
-public class SpellController : MonoBehaviour {
+public class SpellController : NetworkBehaviour {
 	//string key = "";
-	public float inputTimer = 10;
+	public float inputTimer = 2f;
+	public SpellObject currentSpell = new SpellObject();
 
-	StringBuilder spellRunes = new StringBuilder(10);
 	bool fire = false;
 	bool correctSpell = true;
 	string rune;
@@ -22,13 +23,13 @@ public class SpellController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		timer = -1;
-		//SpellBook.FillSpellbookFile();
+		// SpellBook.FillSpellbookFile();
 		spellBook = SpellBook.GenerateSpellbook();
-		Debug.Log(TreeNode.BuildString(spellBook));
+		// Debug.Log(spellBook.ToString());
 		//currentRune = spellBook;
 	}
-	
 	void FixedUpdate(){
+		if(!isLocalPlayer){return;}
 		timer -= Time.deltaTime;
 		//Debug.Log(timer);
 		if(timer <= 0 && timer > -1){
@@ -38,60 +39,61 @@ public class SpellController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Spell Creation
-
-		// if(currentRune.Name == "Book"){
-		// 	correctSpell = false;
-		// }
-		// if(Input.GetKeyDown("q")){
-		// 	stopTimer();
-		// }
-	 // 	if(currentRune.Name == null && fire == false){
-		// 	stopTimer();
-		// 	fire = false;
-	 // 	}
-		// if(Input.GetKeyDown("z") || Input.GetKeyDown("x") || Input.GetKeyDown("c")
-		//  || Input.GetKeyDown("v") || Input.GetKeyDown("b")){
-		// 	//Debug.Log(timer);
-		// 	timer = inputTimer;
-		// 	if(currentRune.isChild(Input.inputString)){
-		// 		currentRune = currentRune.GetChild(Input.inputString);
-		// 		correctSpell = currentRune.Correct;
-		// 		//Debug.Log(currentRune.Correct);
-		// 	}
-		// 	else{
-		// 		correctSpell = false;
-		// 	}
+		if (!isLocalPlayer) { return; }
+		
+		if(currentRune.Name == "Book"){
+			correctSpell = false;
+		}
+		if(Input.GetKeyDown("q")){
+			stopTimer();
+		}
+	 	if(currentRune.Name == null && fire == false){
+			stopTimer();
+			fire = false;
+	 	}
+		if(Input.GetKeyDown("z") || Input.GetKeyDown("x") || Input.GetKeyDown("c")
+		 || Input.GetKeyDown("v") || Input.GetKeyDown("b")){
+			//Debug.Log(timer);
+			timer = inputTimer;
+			if(currentRune.isChild(Input.inputString)){
+				currentRune = currentRune.GetChild(Input.inputString);
+				correctSpell = currentRune.Correct;
+				// Debug.Log(currentRune.Name);
+			}
+			else{
+				correctSpell = false;
+			}
+			if(correctSpell)
+				currentSpell = currentRune.Spell;
 			
-		// }	
+		}	
 
 			
-		// if(Input.GetButtonDown("Fire1")){
-		// 	fire  = true;
-		// 	if(currentRune.Name == "Book"){
-		// 		Debug.Log("No Spell Selected");
-		// 	}
-		// 	if(correctSpell){
-		// 		Debug.Log("Firing Spell " + currentRune.Name);
-		// 		currentRune = spellBook;
-		// 	}
-		// 	else{
-		// 		Debug.Log("Incorrect Spell");
-		// 		currentRune = spellBook;
-		// 	}
-		// 	stopTimer();
-		// }
+		if(Input.GetButtonDown("Fire1")){
+			fire  = true;
+			if(currentRune.Name == "Book"){
+				//Debug.Log("No Spell Selected");
+			}
+			if(correctSpell){
+				Debug.Log("Firing Spell " + currentRune.Name);
+				currentRune = spellBook;
+			}
+			else{
+				//Debug.Log("Incorrect Spell");
+				currentRune = spellBook;
+			}
+			stopTimer();
+		}
 	}
+	// static SpellObject castSpell(){
+	// 	return currentRune.Spell;
+	// }
 	void stopTimer(){
-<<<<<<< Updated upstream
-		// timer = -1;
-		// currentRune = spellBook;
-		// correctSpell = false;
-=======
 		timer = -1;
 		currentRune = spellBook;
 		correctSpell = false;
->>>>>>> Stashed changes
-		// Debug.Log("Reseting Timer");
+		Debug.Log("Timer Finished");
 	}
+
 
 }

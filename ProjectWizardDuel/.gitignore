@@ -39,3 +39,8 @@ sysinfo.txt
 # Unity generated asset merge files
 *.orig
 *.orig.meta
+
+
+#Mac Specific Files
+.DS_Store
+ProjectWizardDuel/.DS_Store
